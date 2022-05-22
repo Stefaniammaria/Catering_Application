@@ -1,0 +1,2 @@
+Bill2 has been placed between 0 and 21
+Bill3 has been placed between 0 and 21
