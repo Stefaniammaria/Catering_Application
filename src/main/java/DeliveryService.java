@@ -4,6 +4,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class DeliveryService implements Serializable {
@@ -130,69 +131,12 @@ public class DeliveryService implements Serializable {
         listaProduse = s.readObject();
         List<MenuItem> lista = new ArrayList<>();
 
-        if (!Objects.equals(t1, "")) {
-            for (int i = 0; i < listaProduse.size(); i++) {
-                if (listaProduse.get(i).getTitle().contains(t1)) {
-                    lista.add(listaProduse.get(i));
-                }
-            }
-        } else {
-            lista = listaProduse;
-        }
-        if (!Objects.equals(t2, "")) {
-            List<MenuItem> lista2 = new ArrayList<>();
-            for (int i = 0; i < lista.size(); i++) {
-                if (lista.get(i).getRating() == Double.parseDouble(t2)) {
-                    lista2.add(lista.get(i));
-                }
-            }
-            lista = lista2;
-        }
-        if (!Objects.equals(t3, "")) {
-            List<MenuItem> lista2 = new ArrayList<>();
-            for (int i = 0; i < lista.size(); i++) {
-                if (lista.get(i).getCalories() == Integer.parseInt(t3)) {
-                    lista2.add(lista.get(i));
-                }
-            }
-            lista = lista2;
-        }
-        if (!Objects.equals(t4, "")) {
-            List<MenuItem> lista2 = new ArrayList<>();
-            for (int i = 0; i < lista.size(); i++) {
-                if (lista.get(i).getProteins() == Integer.parseInt(t4)) {
-                    lista2.add(lista.get(i));
-                }
-            }
-            lista = lista2;
-        }
-        if (!Objects.equals(t5, "")) {
-            List<MenuItem> lista2 = new ArrayList<>();
-            for (int i = 0; i < lista.size(); i++) {
-                if (lista.get(i).getFats() == Integer.parseInt(t5)) {
-                    lista2.add(lista.get(i));
-                }
-            }
-            lista = lista2;
-        }
-        if (!Objects.equals(t6, "")) {
-            List<MenuItem> lista2 = new ArrayList<>();
-            for (int i = 0; i < lista.size(); i++) {
-                if (lista.get(i).getSodium() == Integer.parseInt(t6)) {
-                    lista2.add(lista.get(i));
-                }
-            }
-            lista = lista2;
-        }
-        if (!Objects.equals(t7, "")) {
-            List<MenuItem> lista2 = new ArrayList<>();
-            for (int i = 0; i < lista.size(); i++) {
-                if (lista.get(i).getPrice() == Integer.parseInt(t7)) {
-                    lista2.add(lista.get(i));
-                }
-            }
-            lista = lista2;
-        }
+        lista = listaProduse.stream().filter(produs-> {
+            return produs.getTitle().contains(t1) && produs.getRating() == Double.parseDouble(t2) && produs.getCalories() == Integer.parseInt(t3) &&
+                    produs.getProteins() == Integer.parseInt(t4) && produs.getFats() == Integer.parseInt(t5) && produs.getSodium() == Integer.parseInt(t6) &&
+                    produs.getPrice() == Integer.parseInt(t7);
+        }).collect(Collectors.toList());
+
         String[] columnName = {"Title", "Rating", "Calories", "Protein", "Fats", "Sodium", "Price"};
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(columnName);
@@ -207,6 +151,7 @@ public class DeliveryService implements Serializable {
             rand[6] = String.valueOf(lista.get(i).getPrice());
             model.addRow(rand);
         }
+        lista.clear();
         return model;
     }
 

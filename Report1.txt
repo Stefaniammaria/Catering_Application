@@ -1,2 +1,4 @@
-Bill2 has been placed between 0 and 21
-Bill3 has been placed between 0 and 21
+Bill1 has been placed between 6 and 14
+Bill2 has been placed between 6 and 14
+Bill3 has been placed between 6 and 14
+Bill4 has been placed between 6 and 14

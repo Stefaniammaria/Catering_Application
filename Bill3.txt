@@ -1,4 +1,4 @@
-Sun May 22 18:59:23 EEST 2022
-Apa,Vin,Cola,
-Elena
-Pret total: 7
+Mon May 23 08:19:06 EEST 2022
+
+Stefi
+Pret total: 0
